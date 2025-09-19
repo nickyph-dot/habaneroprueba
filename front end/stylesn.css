@@ -1,0 +1,826 @@
+/* ========== TIPOGRAFÍAS LOCALES ========== */
+
+/* Títulos principales (ejemplo con AmsiPro) */
+@font-face {
+  font-family: "AmsiProCond";
+  src: url("assets/fonts/AmsiProCond-Ultra.woff2") format("woff2");
+  font-weight: 800; /* Ultra */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Painting With Chocolate (webfont) */
+@font-face {
+  font-family: "PaintingWithChocolate";
+  src:
+    url("assets/fonts/Painting_With_Chocolate.woff2") format("woff2"),
+    url("assets/fonts/Painting_With_Chocolate.ttf") format("truetype"); /* opcional como fallback */
+  font-weight: 400;           /* ¡IMPORTANTE! no 100 */
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;       /* evita bold/italic sintéticos */
+}
+
+/* Cuerpo de texto normal */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cuerpo en Bold */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+
+/* Loader */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--beige);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader img {
+  width: 100px; /* Ajusta el tamaño del gif */
+}
+
+
+
+/* Variables */
+:root {
+  --verde: #146349;
+  --naranja: #FF7300;
+  --beige: #F4F0D9;
+  /* Familias tipográficas */
+  --titulo1: "AmsiProCond", sans-serif;
+  --titulo2: "PaintingWithChocolate", cursive;
+  --cuerpo: "Montserrat", sans-serif;
+  --cuerpo-bold: "Montserrat", sans-serif; /* usa font-weight:700 */
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* Base */
+html, body { height: 100%; background: transparent; }
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: url("assets/texture.png") center/900px repeat;
+  opacity: .75;
+  pointer-events: none;
+}
+
+/* Contenido por encima de la textura */
+header, main, section, footer{
+  position: relative;
+  z-index: 1;
+}
+
+
+header{
+  background: var(--verde);
+  position: sticky;           /* quítalo si no quieres que siga al hacer scroll */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18); /* sombra marcada pero limpia */
+}
+
+header .contenedor {
+  width: 95%;        /* más ancho */
+  max-width: 1300px; /* opcional, un poco más grande */
+  margin: 0 auto;
+  padding: 0 0px;   /* menos aire lateral que 100px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Logo en el header */
+.logo img {
+  width: 200px;   /* Aquí defines el tamaño: píxeles o % */
+  height: auto;   /* Mantiene proporción */
+  display: block;
+}
+
+/* Alineación a la izquierda */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* lo empuja a la izquierda */
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+header .menu a {
+  text-decoration: none;
+  color: var(--beige);
+  font-family: var(--titulo1);
+  font-weight: bold;
+  transition: color 0.25s ease, transform 0.2s ease; /* transición suave */
+  display: inline-block; /* importante para que el zoom no rompa el layout */
+}
+
+header .menu a:hover {
+  color: var(--naranja);
+  transform: scale(1.1); /* aquí el zoom (1.08 = 8% más grande) */
+
+}
+
+
+
+
+
+
+/* Hero centrado con decoraciones */
+.page-hero {
+  position: relative; /* importante para contener los absolutes */
+  padding: 4rem 1rem;
+  text-align: center;
+  overflow: hidden; /* para que no se salga nada del área */
+  background-image: linear-gradient(var(--verde), var(--verde)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+.hero-centered {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero-texto {
+  position: relative;
+  z-index: 3;
+}
+
+.page-hero h1 {
+  font-family: var(--titulo1);
+  color: var(--naranja);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+}
+
+.page-hero .lead {
+  font-family: var(--cuerpo);
+  font-size: 1.2rem;
+  margin-bottom: .5rem;
+  color: var(--beige);
+}
+
+.page-hero .micro {
+  font-family: var(--cuerpo-bold);
+  font-size: .9rem;
+  color:var(--naranja);
+}
+
+/* Habaneros flotantes */
+.hero-habanero {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  opacity: 0.9;
+  z-index: 1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hab-left {
+  left: -150px;  /* se mete un poquito al borde */
+  top: 50%;
+  scale: 150%;
+  transform: translateY(-50%) rotate(-10deg);
+}
+
+.hab-right {
+  right: -150px;
+  top: 50%;
+  scale: 150%;
+  transform: translateY(-50%) rotate(10deg);
+  animation-delay: 3s; /* desfase para que no se muevan igual */
+}
+
+/* Animación flotante */
+@keyframes float {
+  0%, 100% { transform: translateY(-50%) translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50%) translateY(-20px) rotate(3deg); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .hero-habanero {
+    width: 80px;
+    opacity: 0.7;
+  }
+  .hab-left { left: -20px; }
+  .hab-right { right: -20px; }
+}
+
+
+
+
+
+
+
+
+/* --- Misión / Visión / Valores --- */
+.valores {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  overflow: hidden; /* para que no se salga nada del área */
+  background-image: linear-gradient(var(--naranja), var(--naranja)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+.valores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.valor-card {
+  background: var(--beige);
+  border-radius: 18px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.valor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.15);
+}
+
+.valor-card h3 {
+  font-family: var(--titulo1);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--verde);
+  position: relative;
+}
+
+.valor-card h3::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: var(--naranja);
+  margin: 0.6rem auto 1.2rem auto;
+  border-radius: 2px;
+}
+
+.valor-card p,
+.valor-card ul {
+  font-family: var(--cuerpo);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.valor-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.valor-card ul li {
+  margin: 0.5rem 0;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.valor-card ul li::before {
+  content: "🔥"; /* ícono estilo Habanero */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsivo */
+@media (max-width: 920px) {
+  .valores-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+
+
+
+
+
+
+
+/* --- Timeline / Historia --- */
+.timeline-section {
+  padding: 5rem 1.5rem;
+  text-align: center;
+  overflow: hidden;
+  background-image: linear-gradient(var(--beige), var(--beige)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+.timeline-section .seccion-title {
+  font-family: var(--titulo1);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  margin-bottom: 3rem;
+  color: var(--verde);
+}
+
+.timeline {
+  position: relative;
+  margin: 0 auto;
+  max-width: 800px;
+  list-style: none;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--naranja);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 5rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Círculo sobre la línea */
+.timeline-item .circle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: 16px;
+  height: 16px;
+  background: var(--verde);
+  border: 3px solid var(--beige);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--naranja);
+  z-index: 2;
+}
+
+/* Fechas */
+.timeline-item .date {
+  position: absolute;
+  top: -10px;
+  font-family: var(--titulo1);
+  font-size: 1.3rem;
+  color: var(--naranja);
+}
+
+.timeline-item .date.left {
+  right: 50%;
+  margin-right: 2rem;
+  text-align: right;
+}
+
+.timeline-item .date.right {
+  left: 50%;
+  margin-left: 2rem;
+  text-align: left;
+}
+
+/* Recuadros de info */
+.timeline-item .body {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  position: relative; /* mantener relative */
+  width: 45%;
+  margin-top: 2rem; /* espacio debajo del año */
+}
+
+.timeline-item .body.left {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: right;
+}
+
+.timeline-item .body.right {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: left;
+}
+
+
+.timeline-item h4 {
+  font-family: var(--titulo1);
+  font-size: 1.2rem;
+  color: var(--verde);
+  margin-bottom: 0.5rem;
+}
+
+.timeline-item p {
+  font-family: var(--cuerpo);
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+.timeline-item .date {
+  top: 0; /* altura del círculo */
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* Animación responsive (opcional) */
+@media (max-width: 767px) {
+  .timeline-item .date,
+  .timeline-item .body {
+    position: relative;
+    left: 0 !important;
+    margin: 1rem auto 0 auto;
+    text-align: center;
+    width: 90%;
+  }
+}
+
+
+
+
+
+/* --- Sección Equipo --- */
+.equipo {
+    padding: 5rem 1.5rem 7rem 1.5rem; /* más padding-bottom */
+  background-image: linear-gradient(var(--naranja), var(--naranja)),
+                    url("assets/texture.png");
+  text-align: center;
+  background-size: cover, 900px;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--naranja);
+
+}
+
+.equipo .seccion-title {
+  font-family: var(--titulo1);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  color: var(--verde);
+  margin-bottom: 3rem;
+}
+
+/* Grid de los miembros del equipo */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+}
+
+/* Tarjetas individuales */
+.team-card {
+  width: 100%;
+  max-width: 260px;
+  perspective: 1000px; /* necesario para el efecto 3D */
+  cursor: pointer;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Contenedor interno para flip */
+.card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+
+/* Fix altura y separación de las tarjetas */
+.team-card {
+  min-height: 360px;   /* asegura que siempre haya espacio */
+}
+
+.card-inner {
+  min-height: 360px;   /* igual que el contenedor */
+}
+
+.card-front img {
+  max-height: 65%;     /* evita que la foto empuje el texto */
+  object-fit: cover;
+  display: block;
+}
+
+.card-front figcaption,
+.card-back figcaption {
+  margin-top: 10px;    /* espacio entre nombre/cargo y recuadro */
+  text-align: center;
+}
+
+
+
+
+/* Flip al hacer click */
+.team-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Frente y reverso */
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  background: #fff;
+}
+
+.card-front img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-front figcaption, .card-back figcaption {
+  padding: 1rem;
+  text-align: center;
+}
+
+.card-front figcaption strong {
+  display: block;
+  font-family: var(--titulo1);
+  font-size: 1.1rem;
+  color: var(--verde);
+  margin-bottom: 0.3rem;
+}
+
+.card-front figcaption span {
+  display: block;
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Reverso */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-back p {
+  font-family: var(--cuerpo);
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.btn-portfolio {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--naranja);
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: var(--titulo1);
+  transition: background 0.3s;
+}
+
+.btn-portfolio:hover {
+  background: #ff8c3c;
+}
+
+/* Responsive móvil */
+@media (max-width: 767px) {
+  .card-front img, .card-back {
+    height: 220px;
+  }
+}
+
+
+
+
+
+
+
+/* CTA */
+.cta {
+  /* arriba flexible, lados 0, abajo 0 */
+  background-image: linear-gradient(var(--verde), var(--verde)),
+                    url("assets/texture.png");
+  text-align: center;
+  background-size: cover, 900px;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--beige);
+  padding: 4rem 0;
+}
+
+.cta-contenedor {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  font-family: var(--titulo1);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.cta h2 .encender {
+  color: var(--naranja);
+   font-family: "PaintingWithChocolate", cursive;
+  font-weight: 400;                 /* que no intente bold falso */
+  text-transform: uppercase;
+  letter-spacing: 0;                /* prueba -0.02em si la ves muy abierta */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 5rem;           /* más grande si quieres contraste */
+}
+
+.cta-subtexto {
+  font-family: var(--cuerpo);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 2rem;
+  color: var(--beige);
+}
+
+.btn-contacto {
+  display: inline-block;
+  background: var(--naranja);
+  color: var(--beige);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-family: var(--titulo1);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-contacto:hover {
+  background: var(--beige);
+  color: var(--naranja);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+
+
+
+
+
+
+
+
+/* ===== FIX PEQUEÑO: eliminar franja entre .testimonios y .cta ===== */
+
+/* 1) Títulos: quitar márgenes por defecto que pueden empujar el flujo */
+.cta h2 {
+  margin-top: 0;
+  margin-bottom: 1rem; /* antes tenías 1 sin unidad */
+}
+
+/* 2) CTA: controlar padding superior/inferior explícitamente.
+   aquí dejo top 4rem (como tenías) y bottom más pequeño para que no haya franja
+   entre CTA y footer. Ajusta bottom si quieres más/menos espacio (2rem - 4rem). */
+.cta {
+  /* mantiene tu background, color, etc. ya definidos arriba */
+  padding: 4rem 0 2rem; /* top 4rem, left/right 0, bottom 2rem */
+  margin-bottom: 0;     /* por si alguna regla previa agregaba espacio externo */
+}
+
+/* 3) Testimonios (si existe esa sección) — asegurar que no empuje hacia abajo */
+.testimonios,
+.testimonios-section {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* 4) Seguridad con pseudo-elementos y stacking context:
+   si tienes texturas con ::before globales, esto evita que "aparezcan" como franja.
+   No subimos z-index de todo, sólo garantizamos un stacking razonable. */
+body::before {
+  z-index: 0;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* 5) Ajuste fino del subtexto y botón dentro de la CTA (opcional, mantiene todo compacto) */
+.cta-subtexto {
+  margin-bottom: 1.5rem; /* antes era 2rem, lo bajamos un poquito */
+}
+
+.btn-contacto {
+  margin-top: 0.25rem;
+}
+
+/* 6) Si por algún motivo aún ves una franja blanca, revisa reglas globales que añadan
+   margins a <h1>, <h2> o <p> (browser defaults). Forzamos safe-resets aquí: */
+.cta h1, .cta h2, .cta h3, .cta p {
+  margin-top: 0;
+}
+
+/* ---- Responsive: menos padding en móvil para que el footer quede pegado correctamente ---- */
+@media (max-width: 767px) {
+  .cta {
+    padding: 3rem 0 1.5rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* Footer */
+footer {
+  background-color: var(--verde);
+  color: var(--beige);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.15); 
+  /*        ^ sombra hacia arriba */
+}
+
+footer .redes img {
+  width: 30px;
+  margin-left: 1rem;
+}

@@ -1,0 +1,314 @@
+
+/* ========== TIPOGRAFÍAS LOCALES ========== */
+
+/* Títulos principales (ejemplo con AmsiPro) */
+@font-face {
+  font-family: "AmsiProCond";
+  src: url("assets/fonts/AmsiProCond-Ultra.woff2") format("woff2");
+  font-weight: 800; /* Ultra */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Painting With Chocolate (webfont) */
+@font-face {
+  font-family: "PaintingWithChocolate";
+  src:
+    url("assets/fonts/Painting_With_Chocolate.woff2") format("woff2"),
+    url("assets/fonts/Painting_With_Chocolate.ttf") format("truetype"); /* opcional como fallback */
+  font-weight: 400;           /* ¡IMPORTANTE! no 100 */
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;       /* evita bold/italic sintéticos */
+}
+
+/* Cuerpo de texto normal */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cuerpo en Bold */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+
+/* Loader */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--beige);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader img {
+  width: 100px; /* Ajusta el tamaño del gif */
+}
+
+
+
+/* Variables */
+:root {
+  --verde: #146349;
+  --naranja: #FF7300;
+  --beige: #F4F0D9;
+  /* Familias tipográficas */
+  --titulo1: "AmsiProCond", sans-serif;
+  --titulo2: "PaintingWithChocolate", cursive;
+  --cuerpo: "Montserrat", sans-serif;
+  --cuerpo-bold: "Montserrat", sans-serif; /* usa font-weight:700 */
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* Base */
+html, body { height: 100%; background: transparent; }
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: url("assets/texture.png") center/900px repeat;
+  opacity: .75;
+  pointer-events: none;
+}
+
+/* Contenido por encima de la textura */
+header, main, section, footer{
+  position: relative;
+  z-index: 1;
+}
+
+
+header{
+  background: var(--verde);
+  position: sticky;           /* quítalo si no quieres que siga al hacer scroll */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18); /* sombra marcada pero limpia */
+}
+
+header .contenedor {
+  width: 95%;        /* más ancho */
+  max-width: 1300px; /* opcional, un poco más grande */
+  margin: 0 auto;
+  padding: 0 0px;   /* menos aire lateral que 100px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Logo en el header */
+.logo img {
+  width: 200px;   /* Aquí defines el tamaño: píxeles o % */
+  height: auto;   /* Mantiene proporción */
+  display: block;
+}
+
+/* Alineación a la izquierda */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* lo empuja a la izquierda */
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+header .menu a {
+  text-decoration: none;
+  color: var(--beige);
+  font-family: var(--titulo1);
+  font-weight: bold;
+  transition: color 0.25s ease, transform 0.2s ease; /* transición suave */
+  display: inline-block; /* importante para que el zoom no rompa el layout */
+}
+
+header .menu a:hover {
+  color: var(--naranja);
+  transform: scale(1.1); /* aquí el zoom (1.08 = 8% más grande) */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------- Contacto ---------- */
+.contacto-section {
+  padding: 3.2rem 1.25rem;
+  background: linear-gradient(var(--beige), var(--beige));
+  color: var(--text);
+}
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 1rem; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 540px;
+  gap: 2.2rem;
+  align-items: start;
+}
+
+/* Info lateral */
+.contact-info h2 {
+  font-family: var(--titulo1);
+  color: var(--verde);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin: 0 0 .5rem 0;
+}
+.contact-info .lead { color: var(--muted); margin-bottom: 1rem; font-family: var(--cuerpo); }
+
+.contact-cards { display: grid; gap: .8rem; margin-top: .8rem; }
+.contact-cards .card {
+  background: #fff;
+  padding: .9rem 1rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.contact-cards .card h4 { margin: 0 0 .25rem 0; font-family: var(--titulo1); color: var(--verde); font-size: .95rem; }
+.contact-cards .muted { color: var(--muted); font-size: .95rem; }
+.contact-cards a.whatsapp { color: var(--naranja); text-decoration: none; font-weight: 700; }
+
+/* Formulario */
+.contact-form-wrap {
+    padding: auto;
+}
+.contact-form {
+  background: #fff;
+  padding: 1.15rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.contact-form label { font-size: .9rem; color: var(--muted); margin-bottom: .15rem; }
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: .7rem .85rem;
+  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  font-family: var(--cuerpo);
+  font-size: .95rem;
+  outline: none;
+  transition: box-shadow .15s, border-color .15s;
+}
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: rgba(20,99,73,0.8);
+  box-shadow: 0 6px 18px rgba(20,99,73,0.06);
+}
+
+/* botones */
+.form-actions { display:flex; gap:.6rem; margin-top: .6rem; }
+.btn { padding: .6rem 1rem; border-radius: 999px; text-decoration: none; font-family: var(--titulo1); }
+.btn-primary { background: var(--naranja); color: #fff; border: 0; }
+.btn-outline { background: transparent; border: 2px solid var(--verde); color: var(--verde); }
+
+/* feedback */
+.form-feedback { margin-top: .6rem; min-height: 1.2rem; font-size: .95rem; }
+.form-feedback.success { color: #0a8a3a; }
+.form-feedback.error { color: #c0392b; }
+
+/* map */
+.map-holder { margin-top: 1.8rem; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+.map-holder-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  gap: 1.2rem;
+}
+.map-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+.map-card h4 {
+  font-family: var(--titulo1);
+  color: var(--verde);
+  margin-bottom: .5rem;
+  font-size: 1rem;
+}
+.map-card iframe {
+  border-radius: 10px;
+  width: 100%;
+}
+
+
+/* responsive */
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-form-wrap { order: 2; }
+  .contact-info { order: 1; }
+}
+
+
+
+/* Footer */
+footer {
+  background-color: var(--verde);
+  color: var(--beige);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.15); 
+  /*        ^ sombra hacia arriba */
+}
+
+footer .redes img {
+  width: 30px;
+  margin-left: 1rem;
+}
+

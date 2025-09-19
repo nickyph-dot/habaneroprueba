@@ -1,0 +1,373 @@
+/* ========== TIPOGRAFÍAS LOCALES ========== */
+
+/* Títulos principales (ejemplo con AmsiPro) */
+@font-face {
+  font-family: "AmsiProCond";
+  src: url("assets/fonts/AmsiProCond-Ultra.woff2") format("woff2");
+  font-weight: 800; /* Ultra */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Painting With Chocolate (webfont) */
+@font-face {
+  font-family: "PaintingWithChocolate";
+  src:
+    url("assets/fonts/Painting_With_Chocolate.woff2") format("woff2"),
+    url("assets/fonts/Painting_With_Chocolate.ttf") format("truetype"); /* opcional como fallback */
+  font-weight: 400;           /* ¡IMPORTANTE! no 100 */
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;       /* evita bold/italic sintéticos */
+}
+
+/* Cuerpo de texto normal */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cuerpo en Bold */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+
+/* Loader */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--beige);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader img {
+  width: 100px; /* Ajusta el tamaño del gif */
+}
+
+
+
+/* Variables */
+:root {
+  --verde: #146349;
+  --naranja: #FF7300;
+  --beige: #F4F0D9;
+  /* Familias tipográficas */
+  --titulo1: "AmsiProCond", sans-serif;
+  --titulo2: "PaintingWithChocolate", cursive;
+  --cuerpo: "Montserrat", sans-serif;
+  --cuerpo-bold: "Montserrat", sans-serif; /* usa font-weight:700 */
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* Base */
+html, body { height: 100%; background: transparent; }
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: url("assets/texture.png") center/900px repeat;
+  opacity: .75;
+  pointer-events: none;
+}
+
+/* Contenido por encima de la textura */
+header, main, section, footer{
+  position: relative;
+  z-index: 1;
+}
+
+
+header{
+  background: var(--verde);
+  position: sticky;           /* quítalo si no quieres que siga al hacer scroll */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18); /* sombra marcada pero limpia */
+}
+
+header .contenedor {
+  width: 95%;        /* más ancho */
+  max-width: 1300px; /* opcional, un poco más grande */
+  margin: 0 auto;
+  padding: 0 0px;   /* menos aire lateral que 100px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Logo en el header */
+.logo img {
+  width: 200px;   /* Aquí defines el tamaño: píxeles o % */
+  height: auto;   /* Mantiene proporción */
+  display: block;
+}
+
+/* Alineación a la izquierda */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* lo empuja a la izquierda */
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+header .menu a {
+  text-decoration: none;
+  color: var(--beige);
+  font-family: var(--titulo1);
+  font-weight: bold;
+  transition: color 0.25s ease, transform 0.2s ease; /* transición suave */
+  display: inline-block; /* importante para que el zoom no rompa el layout */
+}
+
+header .menu a:hover {
+  color: var(--naranja);
+  transform: scale(1.1); /* aquí el zoom (1.08 = 8% más grande) */
+
+}
+
+
+
+
+
+/* ---------- Servicios - estilos ---------- */
+
+
+/* contenedor general */
+.servicios-section {
+  padding: 2rem 0 0 0; 
+  /* arriba flexible, lados 0, abajo 0 */
+  background-image: linear-gradient(var(--verde), var(--verde)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1rem;              /* móviles */
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;           /* pantallas grandes */
+  }
+}
+
+
+/* header */
+.servicios-header h1 {
+  font-family: var(--titulo1);
+  color: var(--verde);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.servicios-header .lead {
+  text-align: center;
+  color: var(--muted);
+  max-width: 820px;
+  margin: 0.5rem auto 2.5rem;
+  font-family: var(--cuerpo);
+}
+
+/* grid de servicios */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+/* tarjeta de servicio */
+.service-card {
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+.service-media img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+/* cuerpo */
+.service-body {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  flex: 1 1 auto;
+}
+.service-body h3 {
+  margin: 0;
+  font-family: var(--titulo1);
+  color: var(--verde);
+  font-size: 1.15rem;
+}
+.service-body p { margin: 0; color: var(--muted); font-family: var(--cuerpo); }
+.features {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* footer de tarjeta */
+.service-footer {
+  margin-top: auto;
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+}
+
+/* botones */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: var(--titulo1);
+  font-size: 0.95rem;
+  letter-spacing: .02em;
+}
+.btn-primary { background: var(--naranja); color: #fff; }
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--verde);
+  color: var(--verde);
+}
+.btn-secondary {
+  background: var(--verde);
+  color: var(--beige);
+  padding: .6rem 1.15rem;
+}
+
+/* Packs / CTA */
+.packs-cta {
+  margin-top: 3.5rem;
+  background: transparent;
+  padding: 2.2rem 1rem;
+  text-align: center;
+}
+.packs-cta h2 { font-family: var(--titulo1); color: var(--verde); margin-bottom: .25rem; }
+.packs-cta .sub { color: var(--muted); margin-bottom: 1.6rem; }
+
+.packs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.pack {
+  padding: 1.2rem;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+.pack.recommended {
+  transform: translateY(-8px);
+  border: 2px dashed rgba(20,99,73,0.06);
+}
+.pack .price { font-size: 1.25rem; color: var(--naranja); font-weight: 700; }
+
+/* FAQ */
+.faq { margin-top: 2.2rem; max-width: 800px; margin-left: auto; margin-right: auto; text-align: left; }
+.faq h3 { font-family: var(--titulo1); color: var(--verde); margin-bottom: .6rem; }
+.faq details { margin-bottom: .6rem; padding: .6rem; background: #fff; border-radius: 8px; box-shadow: var(--shadow); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .packs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 700px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .packs-grid { grid-template-columns: 1fr; }
+  .service-media img { height: 220px; }
+  .packs-cta { padding: 1.5rem 0; }
+}
+
+
+
+
+
+
+
+
+
+/* Footer */
+footer {
+  background-color: var(--verde);
+  color: var(--beige);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.15); 
+  /*        ^ sombra hacia arriba */
+}
+
+footer .redes img {
+  width: 30px;
+  margin-left: 1rem;
+}

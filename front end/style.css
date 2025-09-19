@@ -1,0 +1,646 @@
+/* ========== TIPOGRAFÍAS LOCALES ========== */
+
+/* Títulos principales (ejemplo con AmsiPro) */
+@font-face {
+  font-family: "AmsiProCond";
+  src: url("assets/fonts/AmsiProCond-Ultra.woff2") format("woff2");
+  font-weight: 800; /* Ultra */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Painting With Chocolate (webfont) */
+@font-face {
+  font-family: "PaintingWithChocolate";
+  src:
+    url("assets/fonts/Painting_With_Chocolate.woff2") format("woff2"),
+    url("assets/fonts/Painting_With_Chocolate.ttf") format("truetype"); /* opcional como fallback */
+  font-weight: 400;           /* ¡IMPORTANTE! no 100 */
+  font-style: normal;
+  font-display: swap;
+  font-synthesis: none;       /* evita bold/italic sintéticos */
+}
+
+/* Cuerpo de texto normal */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Cuerpo en Bold */
+@font-face {
+  font-family: "Montserrat";
+  src: url("assets/fonts/Montserrat-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
+
+
+/* Loader */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--beige);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loader img {
+  width: 100px; /* Ajusta el tamaño del gif */
+}
+
+
+
+/* Variables */
+:root {
+  --verde: #146349;
+  --naranja: #FF7300;
+  --beige: #F4F0D9;
+  /* Familias tipográficas */
+  --titulo1: "AmsiProCond", sans-serif;
+  --titulo2: "PaintingWithChocolate", cursive;
+  --cuerpo: "Montserrat", sans-serif;
+  --cuerpo-bold: "Montserrat", sans-serif; /* usa font-weight:700 */
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* Base */
+html, body { height: 100%; background: transparent; }
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: url("assets/texture.png") center/900px repeat;
+  opacity: .75;
+  pointer-events: none;
+}
+
+/* Contenido por encima de la textura */
+header, main, section, footer{
+  position: relative;
+  z-index: 1;
+}
+
+
+header{
+  background: var(--verde);
+  position: sticky;           /* quítalo si no quieres que siga al hacer scroll */
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0,0,0,.18); /* sombra marcada pero limpia */
+}
+
+header .contenedor {
+  width: 95%;        /* más ancho */
+  max-width: 1300px; /* opcional, un poco más grande */
+  margin: 0 auto;
+  padding: 0 0px;   /* menos aire lateral que 100px */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* Logo en el header */
+.logo img {
+  width: 200px;   /* Aquí defines el tamaño: píxeles o % */
+  height: auto;   /* Mantiene proporción */
+  display: block;
+}
+
+/* Alineación a la izquierda */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* lo empuja a la izquierda */
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .menu {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+header .menu a {
+  text-decoration: none;
+  color: var(--beige);
+  font-family: var(--titulo1);
+  font-weight: bold;
+  transition: color 0.25s ease, transform 0.2s ease; /* transición suave */
+  display: inline-block; /* importante para que el zoom no rompa el layout */
+}
+
+header .menu a:hover {
+  color: var(--naranja);
+  transform: scale(1.1); /* aquí el zoom (1.08 = 8% más grande) */
+
+}
+
+
+
+
+
+/* ========== HERO ========== */
+/* ===== Animación de entrada del hero ===== */
+/* Estado inicial */
+.anim-hero .hero-imagen,
+.anim-hero .frase-impacto,
+.anim-hero .frase-impacto .picante,
+.anim-hero .hero-texto p {
+  opacity: 0;
+  will-change: transform, opacity, clip-path;
+}
+
+/* Cuando se activa la animación */
+.anim-hero.in .hero-imagen       { animation: fadeLeft .8s cubic-bezier(.22,.61,.36,1)   .05s forwards; }
+.anim-hero.in .frase-impacto     { animation: fadeUp  .75s cubic-bezier(.22,.61,.36,1)   .20s forwards; }
+.anim-hero.in .frase-impacto .picante { animation: wipeIn .9s cubic-bezier(.22,.61,.36,1) .45s forwards; }
+.anim-hero.in .hero-texto p      { animation: fadeUp  .7s  cubic-bezier(.22,.61,.36,1)   .75s forwards; }
+
+/* Keyframes */
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes wipeIn {
+  0%   { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateY(6px); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
+}
+
+
+
+
+/* HERO con textura + color (multiply) */
+.hero {
+  padding: 2rem 0 0 0; 
+  /* arriba flexible, lados 0, abajo 0 */
+  background-image: linear-gradient(var(--verde), var(--verde)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+/* Contenedor y layout (los tuyos) */
+.hero-contenedor {
+  max-width: 1200px;
+  margin: 0 auto;       /* centra horizontalmente */
+  padding: 0 100px;      /* respiro lateral */
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Imagen */
+.hero-imagen{ line-height: 0; }
+.hero-imagen img{
+  width: 70%;
+  height: auto;
+  display: block;
+  margin: 0;
+  /* vertical-align: bottom; */
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,.25));
+}
+
+/* Título y frase */
+.frase-impacto{
+  font-family: var(--titulo1);
+  font-size: 7rem;       /* tamaño específico solo para hero */
+  line-height: 0.7;
+  color: var(--beige);
+  margin: 0 0 .5rem 0;
+}
+
+.frase-impacto .picante{
+  font-family: "PaintingWithChocolate", cursive;
+  font-weight: 400;                 /* que no intente bold falso */
+  text-transform: uppercase;
+  letter-spacing: 0;                /* prueba -0.02em si la ves muy abierta */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: var(--naranja);
+}
+
+/* Subcopy */
+.hero-texto p{
+  font-family: var(--cuerpo);
+  font-size: 2rem;
+  color: var(--beige);
+  margin-top: .75rem;
+}
+.hero-texto .necesita{
+  font-weight: 800;
+  font-family: var(--cuerpo);        /* “necesita” en naranja */
+  color: var(--naranja);
+}
+
+
+
+
+
+
+
+
+
+/* Spot */
+/* Contenedor general del spot */
+.spot {
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: var(--cuerpo);
+  background-image: linear-gradient(var(--beige), var(--beige)),
+                    url("assets/texture.png"); /* tu hoja */
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+.video-marco {
+  position: relative;
+  width: 900px;       /* ajusta el ancho de la TV */
+  margin: 0 auto;     /* centrar */
+}
+
+.marco-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 2;         /* el marco encima */
+  pointer-events: none; /* para que los clics pasen al video */
+}
+
+.video-marco video {
+  position: absolute;
+  top: 12%;    /* ajusta posición Y */
+  left: 15%;   /* ajusta posición X */
+  width: 70%;  /* ancho relativo a la pantalla */
+  height: 70%; /* alto relativo a la pantalla */
+  object-fit: cover; /* que llene la pantalla */
+  z-index: 1;        /* debajo del marco */
+  border-radius: 8px; /* si tu pantalla es redondeada */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Clientes slider */
+/* Sección clientes */
+.clientes {
+  padding: 2rem 0 0 0; 
+  /* arriba flexible, lados 0, abajo 0 */
+  background-image: linear-gradient(var(--beige), var(--beige)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+  text-align: center;
+  padding: 60px 10px;
+}
+
+.clientes-titulo h2 {
+  text-transform: uppercase;
+  margin: 0;                 /* resetea margen por defecto */
+  line-height: 1.1;          /* controla el interlineado */
+}
+
+.clientes-titulo .confian {
+  color: var(--verde);
+  font-family: var(--titulo1);
+  font-size: 4rem;           /* ajusta tamaño */
+  margin-bottom: -0.80rem;     /* espacio entre las dos líneas */
+}
+
+.clientes-titulo .nosotros {
+  color: var(--naranja);
+   font-family: "PaintingWithChocolate", cursive;
+  font-weight: 400;                 /* que no intente bold falso */
+  text-transform: uppercase;
+  letter-spacing: 0;                /* prueba -0.02em si la ves muy abierta */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 5rem;           /* más grande si quieres contraste */
+  margin-bottom: 10rem;       /* espacio con los logos */
+}
+
+/* Logos */
+.logos-clientes {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.slide-track {
+  display: inline-block;
+  animation: scroll 180s linear infinite;
+}
+
+.slide-track img {
+  height: 100px;
+  width: auto;
+  margin: 0 2rem;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+
+
+
+/* Reset rápido para evitar márgenes inesperados */
+section { margin: 0; padding: 0; }
+.testimonios, .cta { position: relative; z-index: 1; }
+
+/* Testimonios */
+.testimonios {
+  padding: 2rem 0 0 0; 
+  /* arriba flexible, lados 0, abajo 0 */
+  background-image: linear-gradient(var(--naranja), var(--naranja)),
+                    url("assets/texture.png");
+  background-size: cover, 900px;
+  background-repeat: no-repeat, repeat;
+  background-position: center, center;
+  background-blend-mode: multiply;
+}
+
+.testimonios h2 {
+  padding: 1rem 0 0 0; 
+  margin-left: 3rem;
+  font-size: 2rem;
+  font-family: var(--titulo1);
+  color: var(--verde);
+  margin-bottom: 2rem;
+}
+
+/* contenedor visible */
+.testimonios-wrap{
+  
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 140px; /* evita salto al cambiar item */
+}
+
+/* cada item (apilados) */
+.testimonio-item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .6s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--beige);
+  background: rgba(255,255,255,0.40); /* sutil */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  pointer-events: none; /* evita focos accidentales en items invisibles */
+}
+
+/* item visible */
+.testimonio-item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* texto y autor */
+.testimonio-item p {
+  font-family: var(--cuerpo);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+  color: var(--beige);
+}
+
+.testimonio-item .autor {
+  font-family: var(--titulo1);
+  color: var(--verde);
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+/* controles */
+.testimonios-controls {
+  margin-top: 1.2rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.test-btn {
+  background: var(--verde);
+  color: var(--beige);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s;
+}
+.test-btn:hover { transform: translateY(-3px); background: var(--naranja); }
+
+/* accesibilidad: cuando el usuario prefiere reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .testimonio-item,
+  .test-btn { transition: none; }
+}
+
+/* responsive */
+@media (max-width: 720px){
+  .testimonios-wrap{ min-height: 180px; }
+  .testimonios h2 { font-size: 1.6rem; }
+  .testimonio-item p { font-size: 1rem; }
+}
+
+
+
+
+
+/* CTA */
+.cta {
+  /* arriba flexible, lados 0, abajo 0 */
+  background-image: linear-gradient(var(--verde), var(--verde)),
+                    url("assets/texture.png");
+  text-align: center;
+  background-size: cover, 900px;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--beige);
+  padding: 4rem 0;
+}
+
+.cta-contenedor {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta h2 {
+  font-family: var(--titulo1);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.cta h2 .encender {
+  color: var(--naranja);
+   font-family: "PaintingWithChocolate", cursive;
+  font-weight: 400;                 /* que no intente bold falso */
+  text-transform: uppercase;
+  letter-spacing: 0;                /* prueba -0.02em si la ves muy abierta */
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures contextual;
+  font-feature-settings: "liga" 1, "calt" 1;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-size: 5rem;           /* más grande si quieres contraste */
+}
+
+.cta-subtexto {
+  font-family: var(--cuerpo);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 2rem;
+  color: var(--beige);
+}
+
+.btn-contacto {
+  display: inline-block;
+  background: var(--naranja);
+  color: var(--beige);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-family: var(--titulo1);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-contacto:hover {
+  background: var(--beige);
+  color: var(--naranja);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+
+
+
+
+
+
+/* ===== FIX PEQUEÑO: eliminar franja entre .testimonios y .cta ===== */
+
+/* 1) Asegura que no haya margen en títulos que empujen el flujo */
+.testimonios h2,
+.cta h2 {
+  margin-top: 0;    /* quita espacio superior por defecto */
+  margin-bottom: 1; /* lo gestionamos explícitamente abajo si hace falta */
+}
+
+/* 2) Pegamos las secciones: no padding-bottom en testimonios y no padding-top en cta */
+.testimonios { padding-bottom: 0 !important; }
+.cta        { padding-top: 2 !important; }
+
+/* 3) Si el gap viene de los controles (botones) o márgenes internos, reducimos su margen inferior */
+.testimonios-controls,
+.testimonios .testimonios-wrap {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* 4) Seguridad: si hay un pseudo-elemento de textura global con z-index, 
+   asegúrate que las secciones están por encima (para que no se "vea" como franja) */
+body::before { z-index: 0; }
+section { position: relative; z-index: 1; }
+
+
+
+
+
+
+
+
+
+/* Footer */
+footer {
+  background-color: var(--verde);
+  color: var(--beige);
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 -4px 8px rgba(0,0,0,0.15); 
+  /*        ^ sombra hacia arriba */
+}
+
+footer .redes img {
+  width: 30px;
+  margin-left: 1rem;
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habanero Marketing Studio</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon.ico" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Painting_With_Chocolate.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="stylecon.css" />
+</head>
+<body>
+<div id="loader">
+  <img src="assets/loader.gif" alt="Cargando..." />
+</div>
+  <!-- Encabezado -->
+  <header>
+    <nav class="contenedor">
+      <div class="logo">
+        <img src="assets/logo.png" alt="Habanero Logo" />
+      </div>
+      <ul class="menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="sobrenosotros.html">Sobre Nosotros</a></li>
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="portafolio.html">Portafolio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+<!-- CONTACTO -->
+<section class="contacto-section">
+  <div class="container">
+
+    <div class="contact-grid">
+
+      <!-- BLOQUE IZQ: Info + CTA -->
+      <div class="contact-info">
+        <h2>Hablemos</h2>
+        <p class="lead">Contanos tu proyecto, presupuesto o idea — armamos algo a medida. También podés escribirnos por WhatsApp para una respuesta rápida.</p>
+
+        <div class="contact-cards">
+          <div class="card">
+            <h4>Email</h4>
+            <a href="mailto:hola@habanero.studio" class="muted">hola@habanero.studio</a>
+          </div>
+
+          <div class="card">
+            <div class="whatsapp-contact">
+  <label for="ciudad">Selecciona tu ciudad:</label>
+  <select id="ciudad">
+    <option value="">-- Elige una sede --</option>
+    <option value="lapaz">La Paz</option>
+    <option value="santacruz">Santa Cruz</option>
+    <option value="quito">Quito</option>
+  </select>
+
+  <a id="btnWhatsapp" 
+     href="#" 
+     target="_blank" 
+     class="btn-contacto">Contactar por WhatsApp</a>
+</div>
+          </div>
+
+          <div class="card">
+            <h4>Ubicación</h4>
+            <p class="muted">La Paz, Bolivia (trabajamos remoto worldwide)</p>
+          </div>
+        </div>
+
+        <div style="margin-top:1.25rem;">
+          <a class="btn btn-primary whatsapp" href="https://wa.me/591XXXXXXXXX?text=Hola%20quiero%20hablar%20con%20Habanero" target="_blank" rel="noopener">Chatear por WhatsApp</a>
+        </div>
+      </div>
+
+      <!-- BLOQUE DER: Formulario -->
+      <div class="contact-form-wrap">
+        <!-- Si usas Formspree, cambia action al endpoint que te den. -->
+        <form id="contactForm" class="contact-form" method="POST" action="https://formspree.io/f/yourFormID">
+          <label for="name">Nombre</label>
+          <input id="name" name="name" type="text" placeholder="Tu nombre" required>
+
+          <label for="email">Correo</label>
+          <input id="email" name="email" type="email" placeholder="tu@correo.com" required>
+
+          <label for="service">Servicio de interés (opcional)</label>
+          <select id="service" name="service">
+            <option value="">Seleccioná</option>
+            <option value="branding">Estrategia & Branding</option>
+            <option value="produccion">Producción & Contenido</option>
+            <option value="digital">Marketing Digital</option>
+          </select>
+
+          <label for="message">Mensaje</label>
+          <textarea id="message" name="message" rows="6" placeholder="Contanos brevemente tu proyecto, presupuesto y timing" required></textarea>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            <button type="button" id="btnClear" class="btn btn-outline">Limpiar</button>
+          </div>
+
+          <div id="formFeedback" role="status" aria-live="polite" class="form-feedback"></div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- MAPA (opcional) -->
+<div class="map-holder-grid">
+
+  <div class="map-card">
+    <h4>Bolivia – La Paz</h4>
+    <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.058756437449!2d-68.13556252399622!3d-16.500000042843344!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915edf89c3f5b7d5%3A0x6dbb68eafec34b4f!2sLa%20Paz%2C%20Bolivia!5e0!3m2!1ses!2sbo!4v1726651625123!5m2!1ses!2sbo" 
+  width="100%" 
+  height="300" 
+  style="border:0;" 
+  allowfullscreen="" 
+  loading="lazy" 
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+  </div>
+
+  <div class="map-card">
+    <h4>Bolivia – Santa Cruz</h4>
+   <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3819.060770113923!2d-63.18117092399621!3d-17.78333094283218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93f1e9a5d72c8f7d%3A0x3f1c8fba1ef3a4f1!2sSanta%20Cruz%20de%20la%20Sierra%2C%20Bolivia!5e0!3m2!1ses!2sbo!4v1726651725123!5m2!1ses!2sbo" 
+  width="100%" 
+  height="300" 
+  style="border:0;" 
+  allowfullscreen="" 
+  loading="lazy" 
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+  </div>
+
+  <div class="map-card">
+    <h4>Ecuador – Quito</h4>
+    <iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d997691.9480276628!2d-79.81229262399599!3d-0.18065334283203318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a0b12fa34d9%3A0xd9a32a07e8d0f6!2sQuito%2C%20Ecuador!5e0!3m2!1ses!2sec!4v1726651825123!5m2!1ses!2sec" 
+  width="100%" 
+  height="300" 
+  style="border:0;" 
+  allowfullscreen="" 
+  loading="lazy" 
+  referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+  </div>
+
+</div>
+
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Habanero Marketing Studio. Todos los derechos reservados.</p>
+    <div class="redes">
+      <a href="#"><img src="assets/facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="assets/instagram.png" alt="Instagram"></a>
+      <a href="#"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
+    </div>
+  </footer>
+
+  <script src="scriptcon.js"></script>
+  <script>
+(function(){
+  const form = document.getElementById('contactForm');
+  const feedback = document.getElementById('formFeedback');
+  const btnClear = document.getElementById('btnClear');
+
+  // Helper: mostrar feedback
+  function showFeedback(msg, type='success'){
+    feedback.textContent = msg;
+    feedback.classList.remove('success','error');
+    feedback.classList.add(type);
+  }
+
+  // Limpiar formulario
+  btnClear?.addEventListener('click', ()=> {
+    form.reset();
+    feedback.textContent = '';
+  });
+
+  // Envío (si usas Formspree, el action hará el post real; si no, hacemos fallback mailto)
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    feedback.textContent = '';
+
+    const formData = new FormData(form);
+    const name = formData.get('name')?.toString().trim();
+    const email = formData.get('email')?.toString().trim();
+    const message = formData.get('message')?.toString().trim();
+
+    if(!name || !email || !message){
+      showFeedback('Por favor completa los campos obligatorios.', 'error');
+      return;
+    }
+
+    // Si action está vacío o es '#', hacemos mailto fallback
+    const action = form.getAttribute('action') || '';
+    if(action.includes('formspree.io')) {
+      // Enviamos al endpoint (Formspree responde 200/OK)
+      try {
+        const res = await fetch(action, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        });
+        if(res.ok){
+          showFeedback('¡Mensaje enviado! Te respondemos pronto.', 'success');
+          form.reset();
+        } else {
+          const data = await res.json();
+          showFeedback(data?.error || 'Ocurrió un error al enviar. Intentá de nuevo.', 'error');
+        }
+      } catch (err) {
+        showFeedback('No se pudo conectar. Revisá tu conexión.', 'error');
+      }
+    } else {
+      // mailto fallback (abre cliente de correo del usuario)
+      const subject = encodeURIComponent(`Contacto web: ${name}`);
+      const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\nServicio: ${formData.get('service') || ''}\n\nMensaje:\n${message}`);
+      window.location.href = `mailto:hola@habanero.studio?subject=${subject}&body=${body}`;
+      showFeedback('Se abrió tu cliente de correo. Si no, enviá por WhatsApp.', 'success');
+      form.reset();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
